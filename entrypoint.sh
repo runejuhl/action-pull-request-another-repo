@@ -50,11 +50,11 @@ mkdir -p $CLONE_DIR/$INPUT_DESTINATION_FOLDER/
 cd "$CLONE_DIR"
 
 
-BRANCH_EXISTS=git show-ref "$INPUT_DESTINATION_HEAD_BRANCH"
+BRANCH_EXISTS=$(git show-ref "$INPUT_DESTINATION_HEAD_BRANCH" | wc -l)
 
 echo "Checking if branch already exists"
 git fetch -a
-if [ -z $BRANCH_EXISTS ]; 
+if [ -z $BRANCH_EXISTS == 1 ]; 
 then
     git checkout "$INPUT_DESTINATION_HEAD_BRANCH"
 else 
