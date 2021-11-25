@@ -6,6 +6,9 @@ This GitHub Action copies a folder from the current repository to a location in 
 
     on: push
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.YOUR-TOKEN }}
+
     jobs:
       pull-request:
         runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ This GitHub Action copies a folder from the current repository to a location in 
         - name: Create pull request
           uses: car-on-sale/action-pull-request-another-repo@version
           env:
-            API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+            API_TOKEN_GITHUB: ${{ env.GITHUB_TOKEN }}
           with:
             source_folder: 'source-folder'
             destination_repo: 'user-name/repository-name'

@@ -38,7 +38,6 @@ HOME_DIR=$PWD
 CLONE_DIR=$(mktemp -d)
 
 echo "Setting git variables"
-export GITHUB_TOKEN=$API_TOKEN_GITHUB
 git config --global user.email "$INPUT_USER_EMAIL"
 git config --global user.name "$INPUT_USER_NAME"
 
