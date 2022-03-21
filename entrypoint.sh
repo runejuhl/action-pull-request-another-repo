@@ -1,5 +1,6 @@
 #!/bin/bash
 set -euo pipefail
+set -x
 
 if ! [ "${INPUT_SOURCE_FOLDER}" ]; then
   echo "Source folder must be defined"
