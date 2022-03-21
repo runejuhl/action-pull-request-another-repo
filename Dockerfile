@@ -11,7 +11,7 @@ FROM alpine:3.15
 
 RUN apk update && \
   apk upgrade && \
-  apk add bash git jq
+  apk add bash git jq rsync
 
 COPY --from=BUILD /tmp/gh-cli/bin/gh /usr/local/bin
 COPY entrypoint.sh /entrypoint.sh
