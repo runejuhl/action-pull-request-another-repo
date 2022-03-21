@@ -1,18 +1,19 @@
-FROM alpine:3.14
+FROM alpine:3.15 AS BUILD
 
 RUN apk update && \
-    apk upgrade && \
-    apk add git && \
-    apk add go && \
-    apk add make && \
-    apk add make && \
-    apk add rsync && \
-    apk add jq && \
-    git clone https://github.com/cli/cli.git gh-cli && \
-    cd gh-cli && \
-    make && \
-    mv ./bin/gh /usr/local/bin/
+  apk upgrade && \
+  apk add git go make
+RUN git clone --depth=1 https://github.com/cli/cli.git /tmp/gh-cli && \
+  cd /tmp/gh-cli && \
+  make
 
-ADD entrypoint.sh /entrypoint.sh
+FROM alpine:3.15
+
+RUN apk update && \
+  apk upgrade && \
+  apk add bash git jq
+
+COPY --from=BUILD /tmp/gh-cli/bin/gh /usr/local/bin
+COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
