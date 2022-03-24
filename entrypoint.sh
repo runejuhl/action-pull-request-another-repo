@@ -21,6 +21,11 @@ if [ "${INPUT_DESTINATION_HEAD_BRANCH}" == "main" ] || [ "${INPUT_DESTINATION_HE
   exit 1
 fi
 
+if ! [[ "${API_TOKEN_GITHUB}" =~ ^ghp_ ]]; then
+  echo "Personal access token doens't have the right prefix."
+  exit 1
+fi
+
 declare -a GH_PR_ARGS=()
 
 if [ "${INPUT_PULL_REQUEST_REVIEWERS}" ]; then
